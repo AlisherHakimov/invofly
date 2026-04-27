@@ -3,197 +3,382 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Privacy Policy — Invofly</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Invofly — Time Tracker & Invoice Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-:root { --green:#1D9E75; --green-light:#e8f7f2; --green-dark:#155f47; --ink:#111827; --muted:#6b7280; --border:#e5e7eb; --bg:#fafaf9; }
+:root {
+  --green:#1D9E75; --green-dark:#0d5c43; --green-light:#e8f7f2;
+  --green-mid:#22b584; --ink:#0f1923; --muted:#64748b;
+  --border:#e2e8f0; --bg:#f8faf9; --white:#ffffff; --accent:#f59e0b;
+}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;}
-.lang-switch{background:#fff;border-bottom:1px solid var(--border);padding:12px 24px;display:flex;gap:12px;align-items:center;}
-.lang-btn{padding:6px 16px;border-radius:20px;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:13px;font-weight:500;}
-.lang-btn.active{background:var(--green);color:#fff;border-color:var(--green);}
-header{background:#fff;border-bottom:1px solid var(--border);padding:16px 0;}
-.header-inner{max-width:760px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:12px;}
-.logo-mark{width:36px;height:36px;background:var(--green);border-radius:10px;display:flex;align-items:center;justify-content:center;}
-.logo-name{font-family:'DM Serif Display',serif;font-size:22px;}
-.hero{background:linear-gradient(135deg,var(--green-dark),var(--green));padding:56px 24px 48px;text-align:center;}
-.hero h1{font-family:'DM Serif Display',serif;font-size:40px;color:#fff;font-weight:400;margin-bottom:12px;}
-.hero p{color:rgba(255,255,255,0.82);font-size:15px;}
-.hero-meta{margin-top:20px;color:rgba(255,255,255,0.65);font-size:13px;}
-.content{max-width:760px;margin:0 auto;padding:48px 24px 80px;}
-.section{margin-bottom:40px;}
-h2{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;margin-bottom:14px;color:var(--ink);}
-p{color:#374151;font-size:15px;margin-bottom:12px;}
-.info-box{background:var(--green-light);border-left:3px solid var(--green);padding:14px 18px;border-radius:0 10px 10px 0;margin:16px 0;}
-.info-box p{color:var(--green-dark);font-size:14px;margin:0;}
-ul{list-style:none;padding:0;margin:10px 0;}
-ul li{padding-left:18px;position:relative;margin-bottom:8px;font-size:15px;color:#374151;}
-ul li::before{content:'›';position:absolute;left:0;color:var(--green);font-weight:700;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-mark{width:34px;height:34px;background:var(--green);border-radius:9px;display:flex;align-items:center;justify-content:center;}
+.nav-logo-text{font-family:'Playfair Display',serif;font-size:20px;color:var(--ink);font-weight:700;}
+.nav-right{display:flex;align-items:center;gap:20px;}
+.nav-links{display:flex;align-items:center;gap:24px;}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;transition:color .2s;}
+.nav-links a:hover{color:var(--green);}
+.nav-cta{background:var(--green);color:white;padding:9px 20px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;transition:background .2s;}
+.nav-cta:hover{background:var(--green-dark);}
+
+/* Lang selector */
+.lang-selector{position:relative;}
+.lang-btn-nav{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:7px 12px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:'DM Sans',sans-serif;color:var(--ink);}
+.lang-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:white;border:1px solid var(--border);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.12);min-width:200px;padding:8px;display:none;z-index:200;max-height:320px;overflow-y:auto;}
+.lang-selector:hover .lang-dropdown{display:block;}
+.lang-option{padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;}
+.lang-option:hover{background:var(--green-light);color:var(--green-dark);}
+.lang-option.active{background:var(--green-light);color:var(--green-dark);font-weight:700;}
+
+/* HERO */
+.hero{background:linear-gradient(160deg,var(--green-dark) 0%,var(--green) 60%,var(--green-mid) 100%);padding:100px 32px 80px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(255,255,255,0.06) 0%,transparent 60%);}
+.hero-badge{display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:24px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,66px);color:white;font-weight:900;line-height:1.1;letter-spacing:-1.5px;margin-bottom:20px;}
+.hero h1 em{font-style:italic;color:rgba(255,255,255,0.85);}
+.hero p{font-size:18px;color:rgba(255,255,255,0.82);max-width:520px;margin:0 auto 36px;}
+.hero-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+.btn-primary{background:white;color:var(--green-dark);padding:14px 28px;border-radius:12px;font-size:15px;font-weight:700;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(0,0,0,0.15);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,0.2);}
+.btn-secondary{background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.35);color:white;padding:14px 28px;border-radius:12px;font-size:15px;font-weight:600;text-decoration:none;transition:background .2s;}
+.btn-secondary:hover{background:rgba(255,255,255,0.2);}
+.hero-stats{margin-top:56px;display:flex;justify-content:center;gap:48px;flex-wrap:wrap;}
+.hero-stat{text-align:center;}
+.hero-stat-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:white;}
+.hero-stat-label{font-size:13px;color:rgba(255,255,255,0.65);}
+
+/* SECTIONS */
+.section{padding:80px 32px;max-width:1100px;margin:0 auto;}
+.section-label{display:inline-block;background:var(--green-light);color:var(--green-dark);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;}
+.section h2{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-0.5px;margin-bottom:16px;line-height:1.2;}
+.section-sub{font-size:17px;color:var(--muted);max-width:560px;margin-bottom:48px;}
+
+/* FEATURES */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+.feature-card{background:white;border-radius:18px;padding:28px;border:1px solid var(--border);transition:transform .2s,box-shadow .2s;}
+.feature-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.08);}
+.feature-icon{width:48px;height:48px;background:var(--green-light);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+.feature-card h3{font-size:17px;font-weight:700;margin-bottom:8px;}
+.feature-card p{font-size:14px;color:var(--muted);line-height:1.6;}
+
+/* PRICING */
+.pricing-wrap{background:white;padding:80px 32px;}
+.pricing-inner{max-width:900px;margin:0 auto;}
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px;}
+.price-card{border-radius:20px;padding:36px;border:1.5px solid var(--border);background:white;position:relative;}
+.price-card.featured{background:linear-gradient(160deg,var(--green-dark),var(--green));border-color:transparent;box-shadow:0 20px 60px rgba(29,158,117,0.3);}
+.price-badge{position:absolute;top:-12px;right:24px;background:var(--accent);color:white;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 12px;border-radius:20px;}
+.price-name{font-size:14px;font-weight:600;color:var(--muted);margin-bottom:8px;}
+.price-card.featured .price-name{color:rgba(255,255,255,0.7);}
+.price-amount{font-family:'Playfair Display',serif;font-size:52px;font-weight:900;line-height:1;color:var(--ink);margin-bottom:4px;}
+.price-card.featured .price-amount{color:white;}
+.price-period{font-size:14px;color:var(--muted);margin-bottom:28px;}
+.price-card.featured .price-period{color:rgba(255,255,255,0.7);}
+.price-features{list-style:none;margin-bottom:32px;}
+.price-features li{font-size:14px;padding:8px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;color:var(--ink);}
+.price-card.featured .price-features li{border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);}
+.price-features li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;}
+.price-card.featured .price-features li::before{color:rgba(255,255,255,0.8);}
+.price-btn{display:block;width:100%;padding:14px;border-radius:12px;text-align:center;font-size:15px;font-weight:700;text-decoration:none;border:2px solid var(--green);color:var(--green);transition:all .2s;}
+.price-btn:hover{background:var(--green-light);}
+.price-btn.white{background:white;color:var(--green-dark);border-color:white;}
+.price-btn.white:hover{background:rgba(255,255,255,0.9);}
+.pricing-note{text-align:center;margin-top:24px;font-size:13px;color:var(--muted);}
+
+/* LEGAL */
+.legal-section{background:white;}
+.legal-inner{max-width:800px;margin:0 auto;padding:80px 32px;}
+.legal-tabs{display:flex;gap:4px;margin-bottom:48px;background:var(--bg);border-radius:12px;padding:4px;flex-wrap:wrap;}
+.legal-tab{flex:1;min-width:120px;padding:11px;border:none;background:transparent;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);transition:all .2s;font-family:'DM Sans',sans-serif;}
+.legal-tab.active{background:white;color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+.legal-content{display:none;}
+.legal-content.active{display:block;}
+.legal-inner h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid var(--green-light);}
+.legal-inner h3{font-size:17px;font-weight:700;margin:28px 0 10px;}
+.legal-inner p{font-size:15px;color:#374151;margin-bottom:12px;line-height:1.7;}
+.legal-inner ul{list-style:none;margin:10px 0 18px;}
+.legal-inner ul li{font-size:15px;color:#374151;padding:6px 0 6px 22px;position:relative;border-bottom:1px solid var(--border);}
+.legal-inner ul li::before{content:'›';position:absolute;left:0;color:var(--green);font-weight:700;font-size:18px;line-height:1.4;}
+.info-box{background:var(--green-light);border-left:3px solid var(--green);border-radius:0 10px 10px 0;padding:14px 18px;margin:18px 0;}
+.info-box p{color:var(--green-dark);margin:0;font-size:14px;}
 .divider{height:1px;background:var(--border);margin:36px 0;}
-.contact-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:28px;text-align:center;margin-top:24px;}
-.contact-card h3{font-family:'DM Serif Display',serif;font-size:20px;font-weight:400;margin-bottom:8px;}
-.email-btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;text-decoration:none;padding:11px 22px;border-radius:10px;font-size:14px;font-weight:600;margin-top:14px;}
-footer{background:#fff;border-top:1px solid var(--border);padding:20px;text-align:center;font-size:13px;color:var(--muted);}
-.zh{display:none;}
-.en{display:block;}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(255,255,255,0.6);padding:48px 32px 32px;text-align:center;}
+footer .logo{font-family:'Playfair Display',serif;font-size:24px;color:white;margin-bottom:16px;}
+.footer-links{display:flex;justify-content:center;gap:24px;margin:16px 0;flex-wrap:wrap;}
+.footer-links a{color:rgba(255,255,255,0.5);text-decoration:none;}
+.footer-links a:hover{color:var(--green);}
+
+@media(max-width:640px){.pricing-grid{grid-template-columns:1fr;}.nav-links{display:none;}.hero{padding:70px 20px 60px;}.section{padding:60px 20px;}.legal-tab{font-size:11px;padding:9px 6px;}}
 </style>
 </head>
 <body>
 
-<div class="lang-switch">
-  <span style="font-size:13px;color:#6b7280;">Language / 语言:</span>
-  <button class="lang-btn active" onclick="showLang('en')">English</button>
-  <button class="lang-btn" onclick="showLang('zh')">中文</button>
-</div>
-
-<header>
-  <div class="header-inner">
-    <div class="logo-mark">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
     </div>
-    <span class="logo-name">Invofly</span>
+    <span class="nav-logo-text">Invofly</span>
+  </a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#features" data-i18n="nav_features">Features</a>
+      <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
+      <a href="#legal" data-i18n="nav_legal">Legal</a>
+    </div>
+    <div class="lang-selector">
+      <button class="lang-btn-nav" id="currentLang">🇬🇧 EN ▾</button>
+      <div class="lang-dropdown" id="langDropdown"></div>
+    </div>
+    <a href="#pricing" class="nav-cta" data-i18n="nav_cta">Get Pro — $9.99/yr</a>
   </div>
-</header>
+</nav>
 
-<div class="hero">
-  <div class="en"><h1>Privacy Policy</h1><p>We respect your privacy. Your data stays on your device — always.</p></div>
-  <div class="zh"><h1>隐私政策</h1><p>我们尊重您的隐私。您的数据始终存储在您的设备上。</p></div>
-  <div class="hero-meta en">Developer: Alisher Khakimov · App: Invofly · Effective: April 25, 2026</div>
-  <div class="hero-meta zh">开发者：Alisher Khakimov · 应用：Invofly · 生效日期：2026年4月25日</div>
-</div>
+<section class="hero">
+  <div class="hero-badge" data-i18n="hero_badge">For Freelancers Worldwide</div>
+  <h1 data-i18n="hero_h1">Track time.<br><em>Get paid.</em><br>Stay in control.</h1>
+  <p data-i18n="hero_p">All-in-one time tracker and invoice generator. Works offline. Your data stays on your device.</p>
+  <div class="hero-btns">
+    <a href="#pricing" class="btn-primary" data-i18n="hero_btn1">Get Pro — $9.99 / year</a>
+    <a href="#features" class="btn-secondary" data-i18n="hero_btn2">See features</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat-num">16</div><div class="hero-stat-label" data-i18n="stat_langs">Languages</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">97</div><div class="hero-stat-label" data-i18n="stat_currencies">Currencies</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">100%</div><div class="hero-stat-label" data-i18n="stat_offline">Offline</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">$0</div><div class="hero-stat-label" data-i18n="stat_data">Data collected</div></div>
+  </div>
+</section>
 
-<div class="content">
-
-  <!-- ENGLISH -->
-  <div class="en">
-    <div class="section">
-      <h2>1. Overview</h2>
-      <div class="info-box"><p><strong>Short version:</strong> Invofly stores all data locally on your device. We have no servers. We do not collect personal data. Your information never leaves your phone.</p></div>
-      <p>This Privacy Policy applies to the Invofly mobile application, developed by <strong>Alisher Khakimov</strong>. It explains what information is collected, how it is used, and your rights.</p>
+<div id="features">
+<div class="section">
+  <span class="section-label" data-i18n="feat_label">Features</span>
+  <h2 data-i18n="feat_h2">Everything you need to run your freelance business</h2>
+  <p class="section-sub" data-i18n="feat_sub">Timer, invoices, and reports — all in one app, all offline, all private.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg></div>
+      <h3 data-i18n="f1_title">One-tap Timer</h3>
+      <p data-i18n="f1_desc">Start tracking instantly. Assign time to any client and project. Tag by type.</p>
     </div>
-    <div class="divider"></div>
-    <div class="section">
-      <h2>2. Data We Collect</h2>
-      <p><strong>Data you enter directly:</strong></p>
-      <ul>
-        <li>Client names, emails, phone numbers, company names</li>
-        <li>Time entries, project names, task descriptions</li>
-        <li>Invoice details, amounts, tax values</li>
-        <li>Your business name, address, contact info</li>
-      </ul>
-      <p style="margin-top:14px"><strong>App preferences (stored locally):</strong></p>
-      <ul>
-        <li>Language, dark/light mode, default currency</li>
-        <li>Pro license activation status</li>
-      </ul>
-      <div class="info-box"><p><strong>We do NOT collect:</strong> location, device IDs, analytics, crash reports, or any personal data beyond what you enter yourself.</p></div>
+    <div class="feature-card">
+      <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+      <h3 data-i18n="f2_title">PDF Invoices</h3>
+      <p data-i18n="f2_desc">Generate professional invoices in seconds. Auto-totals, tax, discount. Share via any app.</p>
     </div>
-    <div class="divider"></div>
-    <div class="section">
-      <h2>3. Data Storage</h2>
-      <p>All data is stored <strong>exclusively on your device</strong> using a local SQLite database. We operate no servers. Uninstalling the app permanently deletes all your data.</p>
+    <div class="feature-card">
+      <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+      <h3 data-i18n="f3_title">Reports & Insights</h3>
+      <p data-i18n="f3_desc">Monthly, yearly & all-time reports. Client breakdown charts. CSV export.</p>
     </div>
-    <div class="divider"></div>
-    <div class="section">
-      <h2>4. Third-Party Services</h2>
-      <p>Invofly uses no analytics SDKs, no advertising SDKs, and no crash reporting tools. The only optional third-party interaction is payment processing when you choose to purchase Pro, handled by our payment provider. We receive only a license key — no payment data is shared with us.</p>
+    <div class="feature-card">
+      <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10z"/></svg></div>
+      <h3 data-i18n="f4_title">16 Languages & 97 Currencies</h3>
+      <p data-i18n="f4_desc">Available in 16 languages. Bill clients in any of 97 currencies with correct formatting.</p>
     </div>
-    <div class="divider"></div>
-    <div class="section">
-      <h2>5. Children's Privacy</h2>
-      <p>Invofly is not directed to children under 13. We do not knowingly collect information from children.</p>
+    <div class="feature-card">
+      <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+      <h3 data-i18n="f5_title">100% Private & Offline</h3>
+      <p data-i18n="f5_desc">No servers, no cloud, no analytics. All data on your device only. No internet needed.</p>
     </div>
-    <div class="divider"></div>
-    <div class="section">
-      <h2>6. Your Rights</h2>
-      <ul>
-        <li><strong>Access & Delete:</strong> All data is directly accessible in the app. Delete entries anytime.</li>
-        <li><strong>Full erasure:</strong> Uninstall the app to permanently delete everything.</li>
-        <li><strong>Export:</strong> Use CSV export (Pro) to back up your data.</li>
-      </ul>
-    </div>
-    <div class="divider"></div>
-    <div class="section">
-      <h2>7. Contact</h2>
-      <div class="contact-card">
-        <h3>Questions about privacy?</h3>
-        <p>Developer: <strong>Alisher Khakimov</strong></p>
-        <a href="mailto:invofly@gmail.com" class="email-btn">invofly@gmail.com</a>
-      </div>
+    <div class="feature-card">
+      <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <h3 data-i18n="f6_title">Client Management</h3>
+      <p data-i18n="f6_desc">Organize clients with hourly rates, currencies, and contact info. Color-coded.</p>
     </div>
   </div>
-
-  <!-- CHINESE -->
-  <div class="zh">
-    <div class="section">
-      <h2>1. 概述</h2>
-      <div class="info-box"><p><strong>简短说明：</strong>Invofly 将所有数据存储在您的设备本地。我们没有服务器，不收集个人数据，您的信息不会离开您的手机。</p></div>
-      <p>本隐私政策适用于由<strong>Alisher Khakimov</strong>开发的 Invofly 移动应用程序。本政策说明我们收集哪些信息、如何使用以及您的权利。</p>
-    </div>
-    <div class="divider"></div>
-    <div class="section">
-      <h2>2. 我们收集的数据</h2>
-      <p><strong>您直接输入的数据：</strong></p>
-      <ul>
-        <li>客户姓名、电子邮件、电话、公司名称</li>
-        <li>时间条目、项目名称、任务描述</li>
-        <li>发票详情、金额、税款</li>
-        <li>您的企业名称、地址、联系信息</li>
-      </ul>
-      <p style="margin-top:14px"><strong>应用偏好设置（本地存储）：</strong></p>
-      <ul>
-        <li>语言、深色/浅色模式、默认货币</li>
-        <li>Pro 许可证激活状态</li>
-      </ul>
-      <div class="info-box"><p><strong>我们不收集：</strong>位置信息、设备ID、分析数据、崩溃报告或您自行输入以外的任何个人数据。</p></div>
-    </div>
-    <div class="divider"></div>
-    <div class="section">
-      <h2>3. 数据存储</h2>
-      <p>所有数据<strong>仅存储在您的设备</strong>上，使用本地 SQLite 数据库。我们不运营任何服务器。卸载应用将永久删除您的所有数据。</p>
-    </div>
-    <div class="divider"></div>
-    <div class="section">
-      <h2>4. 第三方服务</h2>
-      <p>Invofly 不使用任何分析SDK、广告SDK或崩溃报告工具。唯一可选的第三方交互是购买 Pro 版本时的支付处理，由我们的支付提供商处理。我们仅收到许可证密钥，不与我们共享任何支付数据。</p>
-    </div>
-    <div class="divider"></div>
-    <div class="section">
-      <h2>5. 儿童隐私</h2>
-      <p>Invofly 不面向13岁以下儿童。我们不会故意收集儿童的信息。</p>
-    </div>
-    <div class="divider"></div>
-    <div class="section">
-      <h2>6. 您的权利</h2>
-      <ul>
-        <li><strong>访问与删除：</strong>所有数据可在应用中直接访问。随时删除条目。</li>
-        <li><strong>完全删除：</strong>卸载应用将永久删除所有内容。</li>
-        <li><strong>导出：</strong>使用CSV导出功能（Pro版）备份您的数据。</li>
-      </ul>
-    </div>
-    <div class="divider"></div>
-    <div class="section">
-      <h2>7. 联系我们</h2>
-      <div class="contact-card">
-        <h3>有关隐私的问题？</h3>
-        <p>开发者：<strong>Alisher Khakimov</strong></p>
-        <a href="mailto:invofly@gmail.com" class="email-btn">invofly@gmail.com</a>
-      </div>
-    </div>
-  </div>
-
+</div>
 </div>
 
-<footer>© 2026 Invofly · Developer: Alisher Khakimov · invofly@gmail.com</footer>
+<section id="pricing">
+<div class="pricing-wrap">
+<div class="pricing-inner">
+  <span class="section-label" data-i18n="price_label">Pricing</span>
+  <h2 data-i18n="price_h2">Simple, honest pricing</h2>
+  <p class="section-sub" data-i18n="price_sub">One low annual fee. No hidden costs, no subscription traps.</p>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-name" data-i18n="free_name">Free Plan</div>
+      <div class="price-amount">$0</div>
+      <div class="price-period" data-i18n="free_period">Forever free</div>
+      <ul class="price-features">
+        <li data-i18n="free_f1">Up to 3 clients</li>
+        <li data-i18n="free_f2">Up to 2 invoices</li>
+        <li data-i18n="free_f3">Basic timer tracking</li>
+        <li data-i18n="free_f4">PDF invoices (with watermark)</li>
+        <li data-i18n="free_f5">Monthly reports</li>
+      </ul>
+      <a href="https://play.google.com/store/apps/details?id=com.invofly.app" class="price-btn" data-i18n="free_btn" target="_blank">Download Free</a>
+    </div>
+    <div class="price-card featured">
+      <div class="price-badge" data-i18n="pro_badge">Most Popular</div>
+      <div class="price-name" data-i18n="pro_name">Pro Plan</div>
+      <div class="price-amount">$9.99</div>
+      <div class="price-period" data-i18n="pro_period">per year · one-time annual payment</div>
+      <ul class="price-features">
+        <li data-i18n="pro_f1">Unlimited clients</li>
+        <li data-i18n="pro_f2">Unlimited invoices</li>
+        <li data-i18n="pro_f3">PDF without watermark</li>
+        <li data-i18n="pro_f4">Full reports: monthly, yearly, all-time</li>
+        <li data-i18n="pro_f5">CSV export</li>
+        <li data-i18n="pro_f6">Priority email support</li>
+        <li data-i18n="pro_f7">Use on any device with your key</li>
+      </ul>
+      <a href="https://www.creem.io/payment/prod_YOURPRODID" class="price-btn white" data-i18n="pro_btn">Get Pro — $9.99/year →</a>
+    </div>
+  </div>
+  <p class="pricing-note" data-i18n="price_note">💳 Secure payment · Card & PayPal · Activation key sent to email instantly<br>License valid for 1 year. Questions? <a href="mailto:invofly@gmail.com" style="color:var(--green)">invofly@gmail.com</a></p>
+</div>
+</div>
+</section>
+
+<section class="legal-section" id="legal">
+<div class="legal-inner">
+  <div class="legal-tabs">
+    <button class="legal-tab active" onclick="showLegal('privacy')" id="ltab-privacy">🔒 Privacy Policy</button>
+    <button class="legal-tab" onclick="showLegal('terms')" id="ltab-terms">📄 Terms of Service</button>
+  </div>
+
+  <!-- PRIVACY -->
+  <div id="legal-privacy" class="legal-content active">
+    <h2>Privacy Policy</h2>
+    <p><em>Developer: Alisher Khakimov · App: Invofly · Effective: April 25, 2026</em></p>
+    <div class="info-box"><p><strong>Short version:</strong> Invofly stores all data locally on your device. No servers, no analytics, no personal data collection.</p></div>
+    <h3>1. Overview</h3>
+    <p>This Privacy Policy applies to the Invofly mobile application developed by <strong>Alisher Khakimov</strong>. By using Invofly, you agree to the practices described here.</p>
+    <h3>2. Data We Collect</h3>
+    <p>Data you enter directly:</p>
+    <ul><li>Client names, emails, phone numbers, company names</li><li>Time entries, project names, task descriptions</li><li>Invoice details, amounts, tax and discount values</li><li>Your business name, address, contact info</li></ul>
+    <p>App preferences (stored locally):</p>
+    <ul><li>Language, dark/light mode, default currency</li><li>Pro license activation status and expiry</li></ul>
+    <div class="info-box"><p><strong>We do NOT collect:</strong> location, device IDs, crash reports, analytics, or any data beyond what you enter yourself.</p></div>
+    <h3>3. Data Storage</h3>
+    <p>All data is stored <strong>exclusively on your device</strong> using a local SQLite database. We operate no servers. Uninstalling the app permanently deletes all your data.</p>
+    <h3>4. Third-Party Services</h3>
+    <p>No analytics or advertising SDKs. The only optional third-party interaction is payment processing when purchasing Pro (handled by Creem.io). We receive only a license key — no payment data is shared with us.</p>
+    <h3>5. Children's Privacy</h3>
+    <p>Invofly is not directed to children under 13. We do not knowingly collect information from children.</p>
+    <h3>6. Your Rights</h3>
+    <ul><li>Access and delete entries directly in the app</li><li>Export data as CSV (Pro feature)</li><li>Full erasure: uninstall to permanently delete everything</li></ul>
+    <h3>7. Contact</h3>
+    <p>Developer: <strong>Alisher Khakimov</strong> · <a href="mailto:invofly@gmail.com" style="color:var(--green)">invofly@gmail.com</a></p>
+
+  </div>
+
+  <!-- TERMS -->
+  <div id="legal-terms" class="legal-content">
+    <h2>Terms of Service</h2>
+    <p><em>Developer: Alisher Khakimov · App: Invofly · Effective: April 25, 2026</em></p>
+    <h3>1. Acceptance</h3>
+    <p>By downloading or using Invofly, you agree to these Terms. If you do not agree, please do not use the app.</p>
+    <h3>2. Description of Service</h3>
+    <p>Invofly is a mobile app for time tracking and invoice generation. Free plan includes limited features. Pro plan ($9.99/year) unlocks unlimited access.</p>
+    <h3>3. Pro License</h3>
+    <ul><li>Pro is a one-time annual payment of <strong>$9.99 USD/year</strong></li><li>License key delivered to your email upon purchase</li><li>Each key is valid for <strong>365 days</strong> from activation</li><li>You may use your key on any device you own</li><li>Keys are non-transferable and non-refundable after activation</li><li>Renewal is optional — data remains accessible on the free plan</li></ul>
+    <h3>4. Refund Policy</h3>
+    <p>We offer a <strong>7-day refund</strong> if the app does not function as described. Contact <a href="mailto:invofly@gmail.com" style="color:var(--green)">invofly@gmail.com</a> within 7 days of purchase. Refunds are not available after a license key has been activated.</p>
+    <h3>5. User Responsibilities</h3>
+    <ul><li>Keep your license key confidential</li><li>Do not share, sell, or transfer your license key</li><li>Do not use Invofly for illegal purposes</li><li>Back up your data regularly using CSV export</li></ul>
+    <h3>6. Intellectual Property</h3>
+    <p>Invofly and all its content are owned by Alisher Khakimov. You may not copy, modify, or reverse engineer the application.</p>
+    <h3>7. Disclaimer</h3>
+    <p>Invofly is provided "as is" without warranties. We do not guarantee the app will be error-free or uninterrupted.</p>
+    <h3>8. Limitation of Liability</h3>
+    <p>To the maximum extent permitted by law, Alisher Khakimov shall not be liable for any indirect, incidental, or consequential damages arising from your use of Invofly.</p>
+    <h3>9. Changes</h3>
+    <p>We may update these Terms at any time. Continued use constitutes acceptance of updated Terms.</p>
+    <h3>10. Contact</h3>
+    <p><strong>Alisher Khakimov</strong> · <a href="mailto:invofly@gmail.com" style="color:var(--green)">invofly@gmail.com</a></p>
+  </div>
+</div>
+</section>
+
+<footer>
+  <div class="logo">Invofly</div>
+  <p>Time Tracker & Invoice Generator for Freelancers</p>
+  <div class="footer-links">
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#legal">Privacy Policy</a>
+    <a href="#legal">Terms of Service</a>
+    <a href="mailto:invofly@gmail.com">invofly@gmail.com</a>
+  </div>
+  <p style="margin-top:16px;font-size:12px">© 2026 Alisher Khakimov · Invofly · All rights reserved</p>
+</footer>
 
 <script>
-function showLang(lang) {
-  document.querySelectorAll('.en').forEach(el => el.style.display = lang==='en' ? 'block' : 'none');
-  document.querySelectorAll('.zh').forEach(el => el.style.display = lang==='zh' ? 'block' : 'none');
-  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
-}
-</script>
+// ── Translations ──────────────────────────────────────────────
+const langs = {
+  en:  {flag:'🇬🇧', name:'English',           nav_features:'Features', nav_pricing:'Pricing', nav_legal:'Legal', nav_cta:'Get Pro — $9.99/yr', hero_badge:'For Freelancers Worldwide', hero_h1:'Track time.<br><em>Get paid.</em><br>Stay in control.', hero_p:'All-in-one time tracker and invoice generator. Works offline. Your data stays on your device.', hero_btn1:'Get Pro — $9.99 / year', hero_btn2:'See features', stat_langs:'Languages', stat_currencies:'Currencies', stat_offline:'Offline', stat_data:'Data collected', feat_label:'Features', feat_h2:'Everything you need to run your freelance business', feat_sub:'Timer, invoices, and reports — all in one app, all offline, all private.', f1_title:'One-tap Timer', f1_desc:'Start tracking instantly. Assign time to any client and project. Tag by type.', f2_title:'PDF Invoices', f2_desc:'Generate professional invoices in seconds. Auto-totals, tax, discount. Share via any app.', f3_title:'Reports & Insights', f3_desc:'Monthly, yearly & all-time reports. Client breakdown charts. CSV export.', f4_title:'16 Languages & 97 Currencies', f4_desc:'Available in 16 languages. Bill in any of 97 currencies with correct formatting.', f5_title:'100% Private & Offline', f5_desc:'No servers, no cloud, no analytics. All data on your device only.', f6_title:'Client Management', f6_desc:'Organize clients with hourly rates, currencies, and contact info.', price_label:'Pricing', price_h2:'Simple, honest pricing', price_sub:'One low annual fee. No hidden costs, no subscription traps.', free_name:'Free Plan', free_period:'Forever free', free_f1:'Up to 3 clients', free_f2:'Up to 2 invoices', free_f3:'Basic timer tracking', free_f4:'PDF invoices (with watermark)', free_f5:'Monthly reports', free_btn:'Download Free', pro_badge:'Most Popular', pro_name:'Pro Plan', pro_period:'per year · one-time annual payment', pro_f1:'Unlimited clients', pro_f2:'Unlimited invoices', pro_f3:'PDF without watermark', pro_f4:'Full reports: monthly, yearly, all-time', pro_f5:'CSV export', pro_f6:'Priority email support', pro_f7:'Use on any device with your key', pro_btn:'Get Pro — $9.99/year →', price_note:'💳 Secure payment · Card & PayPal · Activation key sent to email instantly<br>License valid for 1 year.'},
+  ru:  {flag:'🇷🇺', name:'Русский',            nav_features:'Возможности', nav_pricing:'Цены', nav_legal:'Документы', nav_cta:'Pro — $9.99/год', hero_badge:'Для фрилансеров по всему миру', hero_h1:'Учёт времени.<br><em>Получай оплату.</em><br>Будь в контроле.', hero_p:'Всё в одном: таймер и генератор счетов. Работает офлайн. Данные только на вашем устройстве.', hero_btn1:'Получить Pro — $9.99 / год', hero_btn2:'Возможности', stat_langs:'Языков', stat_currencies:'Валют', stat_offline:'Офлайн', stat_data:'Данных собрано', feat_label:'Возможности', feat_h2:'Всё для вашего фриланс-бизнеса', feat_sub:'Таймер, счета и отчёты — всё в одном, офлайн и приватно.', f1_title:'Таймер в один тап', f1_desc:'Мгновенный старт. Привязывайте время к клиентам и проектам.', f2_title:'PDF-счета', f2_desc:'Профессиональные счета за секунды. Автоматический итог, налог, скидка.', f3_title:'Отчёты и аналитика', f3_desc:'Месячные, годовые и общие отчёты. Экспорт в CSV.', f4_title:'16 языков и 97 валют', f4_desc:'Доступно на 16 языках. Выставляйте счета в любой из 97 валют.', f5_title:'100% приватно и офлайн', f5_desc:'Никаких серверов, аналитики. Все данные только на устройстве.', f6_title:'Управление клиентами', f6_desc:'Клиенты с почасовыми ставками, валютами и контактами.', price_label:'Тарифы', price_h2:'Простые честные цены', price_sub:'Одна низкая годовая плата. Без скрытых платежей.', free_name:'Бесплатный', free_period:'Навсегда бесплатно', free_f1:'До 3 клиентов', free_f2:'До 2 счетов', free_f3:'Базовый таймер', free_f4:'PDF-счета (с водяным знаком)', free_f5:'Отчёт за месяц', free_btn:'Скачать бесплатно', pro_badge:'Популярный', pro_name:'Pro', pro_period:'в год · разовый платёж', pro_f1:'Неограниченные клиенты', pro_f2:'Неограниченные счета', pro_f3:'PDF без водяного знака', pro_f4:'Полные отчёты: месяц, год, всё время', pro_f5:'Экспорт CSV', pro_f6:'Приоритетная поддержка', pro_f7:'На любом устройстве по ключу', pro_btn:'Получить Pro — $9.99/год →', price_note:'💳 Безопасная оплата · Карта и PayPal · Ключ активации на email'},
+  uz:  {flag:'🇺🇿', name:"O'zbek",            nav_features:'Xususiyatlar', nav_pricing:'Narxlar', nav_legal:'Hujjatlar', nav_cta:"Pro — \$9.99/yil", hero_badge:'Dunyo bo\'ylab frilanserlar uchun', hero_h1:"Vaqtni kuzating.<br><em>To'lovni oling.</em><br>Nazoratda bo'ling.", hero_p:"Vaqt kuzatuvchi va hisob-faktura yaratuvchi. Offlayn ishlaydi. Ma'lumotlar faqat qurilmangizda.", hero_btn1:"Pro olish — \$9.99 / yil", hero_btn2:'Xususiyatlarni ko\'rish', stat_langs:'Til', stat_currencies:'Valyuta', stat_offline:'Offlayn', stat_data:"Ma'lumot yig'ilmaydi", feat_label:'Xususiyatlar', feat_h2:'Frilanser biznesingiz uchun hamma narsa', feat_sub:"Taymer, hisob-fakturalar va hisobotlar — barchasi bir joyda, offlayn va xavfsiz.", f1_title:'Bir bosish taymer', f1_desc:"Darhol boshlang. Vaqtni clientlar va proyektlarga bog'lang.", f2_title:'PDF Hisob-fakturalar', f2_desc:'Sekundlar ichida professional hisob-faktura. Avtomatik hisob, soliq, chegirma.', f3_title:'Hisobotlar', f3_desc:"Oylik, yillik va barcha vaqt hisobotlari. CSV eksport.", f4_title:'16 til va 97 valyuta', f4_desc:"16 tilda mavjud. 97 valyutada hisob-faktura yozish.", f5_title:'100% Xususiy va Offlayn', f5_desc:"Server yo'q, analitika yo'q. Barcha ma'lumotlar faqat qurilmangizda.", f6_title:'Klientlarni boshqarish', f6_desc:"Soatlik narx, valyuta va kontaktlar bilan klientlarni tartibga soling.", price_label:'Narxlar', price_h2:'Oddiy, halol narxlar', price_sub:"Yillik to'lov. Yashirin xarajat yo'q.", free_name:'Bepul', free_period:'Abadiy bepul', free_f1:'Maksimum 3 ta client', free_f2:'Maksimum 2 ta hisob-faktura', free_f3:'Asosiy taymer', free_f4:'PDF (watermark bilan)', free_f5:'Oylik hisobot', free_btn:'Bepul yuklab olish', pro_badge:'Mashhur', pro_name:'Pro', pro_period:"yiliga · bir martalik to'lov", pro_f1:'Cheksiz clientlar', pro_f2:'Cheksiz hisob-fakturalar', pro_f3:'Watermarksiz PDF', pro_f4:'To\'liq hisobotlar: oylik, yillik, barcha vaqt', pro_f5:'CSV eksport', pro_f6:"Ustuvor qo'llab-quvvatlash", pro_f7:"Istalgan qurilmada kalit bilan", pro_btn:"Pro olish — \$9.99/yil →", price_note:"💳 Xavfsiz to'lov · Karta va PayPal · Aktivatsiya kodi emailga keladi"},
+  es:  {flag:'🇪🇸', name:'Español',            nav_features:'Funciones', nav_pricing:'Precios', nav_legal:'Legal', nav_cta:'Obtener Pro — $9.99/año', hero_badge:'Para Freelancers en Todo el Mundo', hero_h1:'Registra el tiempo.<br><em>Cobra tu trabajo.</em><br>Mantén el control.', hero_p:'Rastreador de tiempo y generador de facturas todo en uno. Funciona sin conexión.', hero_btn1:'Obtener Pro — $9.99 / año', hero_btn2:'Ver funciones', stat_langs:'Idiomas', stat_currencies:'Monedas', stat_offline:'Sin conexión', stat_data:'Datos recopilados', feat_label:'Funciones', feat_h2:'Todo lo que necesitas para tu negocio freelance', feat_sub:'Temporizador, facturas e informes — todo en una app, sin conexión y privado.', f1_title:'Temporizador de un toque', f1_desc:'Empieza a rastrear al instante. Asigna tiempo a clientes y proyectos.', f2_title:'Facturas PDF', f2_desc:'Genera facturas profesionales en segundos. Totales automáticos, impuestos, descuentos.', f3_title:'Informes', f3_desc:'Informes mensuales, anuales y de todo el tiempo. Exportar CSV.', f4_title:'16 Idiomas y 97 Monedas', f4_desc:'Disponible en 16 idiomas. Factura en cualquiera de las 97 monedas.', f5_title:'100% Privado y Sin Conexión', f5_desc:'Sin servidores, sin análisis. Todos los datos en tu dispositivo.', f6_title:'Gestión de Clientes', f6_desc:'Organiza clientes con tarifas por hora, monedas y contactos.', price_label:'Precios', price_h2:'Precios simples y honestos', price_sub:'Una tarifa anual baja. Sin costos ocultos.', free_name:'Plan Gratuito', free_period:'Siempre gratis', free_f1:'Hasta 3 clientes', free_f2:'Hasta 2 facturas', free_f3:'Temporizador básico', free_f4:'Facturas PDF (con marca de agua)', free_f5:'Informes mensuales', free_btn:'Descargar gratis', pro_badge:'Más Popular', pro_name:'Plan Pro', pro_period:'por año · pago anual único', pro_f1:'Clientes ilimitados', pro_f2:'Facturas ilimitadas', pro_f3:'PDF sin marca de agua', pro_f4:'Informes completos', pro_f5:'Exportar CSV', pro_f6:'Soporte prioritario', pro_f7:'En cualquier dispositivo con tu clave', pro_btn:'Obtener Pro — $9.99/año →', price_note:'💳 Pago seguro · Tarjeta y PayPal · Clave de activación enviada al correo'},
+  ar:  {flag:'🇸🇦', name:'العربية',            nav_features:'الميزات', nav_pricing:'الأسعار', nav_legal:'القانونية', nav_cta:'احصل على Pro — $9.99/سنة', hero_badge:'للمستقلين حول العالم', hero_h1:'تتبع وقتك.<br><em>احصل على أجرك.</em><br>ابقَ في السيطرة.', hero_p:'أداة شاملة لتتبع الوقت وإنشاء الفواتير. تعمل بدون إنترنت. بياناتك على جهازك فقط.', hero_btn1:'احصل على Pro — $9.99 / سنة', hero_btn2:'شاهد الميزات', stat_langs:'لغة', stat_currencies:'عملة', stat_offline:'بدون إنترنت', stat_data:'بيانات مجمعة', feat_label:'الميزات', feat_h2:'كل ما تحتاجه لعملك المستقل', feat_sub:'مؤقت، فواتير، وتقارير — كل شيء في تطبيق واحد، بدون إنترنت وخاص.', f1_title:'مؤقت بنقرة واحدة', f1_desc:'ابدأ التتبع فوراً. خصص الوقت لأي عميل ومشروع.', f2_title:'فواتير PDF', f2_desc:'إنشاء فواتير احترافية في ثوانٍ. إجماليات تلقائية، ضرائب، خصومات.', f3_title:'التقارير والإحصائيات', f3_desc:'تقارير شهرية وسنوية وكاملة. تصدير CSV.', f4_title:'16 لغة و97 عملة', f4_desc:'متاح بـ 16 لغة. الفواتير بأي من 97 عملة.', f5_title:'100% خاص وبدون إنترنت', f5_desc:'لا خوادم، لا تحليلات. جميع البيانات على جهازك فقط.', f6_title:'إدارة العملاء', f6_desc:'نظم عملاءك مع الأسعار بالساعة والعملات وجهات الاتصال.', price_label:'الأسعار', price_h2:'أسعار بسيطة وصادقة', price_sub:'رسوم سنوية منخفضة. بدون تكاليف خفية.', free_name:'الخطة المجانية', free_period:'مجاني للأبد', free_f1:'حتى 3 عملاء', free_f2:'حتى فاتورتين', free_f3:'مؤقت أساسي', free_f4:'فواتير PDF (مع علامة مائية)', free_f5:'التقارير الشهرية', free_btn:'تحميل مجاناً', pro_badge:'الأكثر شعبية', pro_name:'خطة Pro', pro_period:'سنوياً · دفعة سنوية واحدة', pro_f1:'عملاء غير محدودين', pro_f2:'فواتير غير محدودة', pro_f3:'PDF بدون علامة مائية', pro_f4:'تقارير كاملة', pro_f5:'تصدير CSV', pro_f6:'دعم ذو أولوية', pro_f7:'على أي جهاز بمفتاحك', pro_btn:'احصل على Pro — $9.99/سنة ←', price_note:'💳 دفع آمن · بطاقة وPayPal · مفتاح التفعيل يُرسل للبريد فوراً'},
+  fr:  {flag:'🇫🇷', name:'Français',           nav_features:'Fonctionnalités', nav_pricing:'Tarifs', nav_legal:'Légal', nav_cta:'Obtenir Pro — 9,99$/an', hero_badge:'Pour les Freelances du Monde Entier', hero_h1:'Suivez votre temps.<br><em>Soyez payé.</em><br>Gardez le contrôle.', hero_p:'Suivi du temps et générateur de factures tout-en-un. Fonctionne hors ligne.', hero_btn1:'Obtenir Pro — 9,99 $ / an', hero_btn2:'Voir les fonctionnalités', stat_langs:'Langues', stat_currencies:'Devises', stat_offline:'Hors ligne', stat_data:'Données collectées', feat_label:'Fonctionnalités', feat_h2:'Tout ce dont vous avez besoin', feat_sub:'Minuterie, factures et rapports — tout en un, hors ligne et privé.', f1_title:'Minuterie en un tap', f1_desc:'Commencez à suivre instantanément. Assignez du temps à vos clients.', f2_title:'Factures PDF', f2_desc:'Créez des factures professionnelles en secondes. Totaux auto, taxes, remises.', f3_title:'Rapports', f3_desc:'Rapports mensuels, annuels et globaux. Export CSV.', f4_title:'16 Langues et 97 Devises', f4_desc:'Disponible en 16 langues. Facturez dans 97 devises.', f5_title:'100% Privé et Hors Ligne', f5_desc:'Pas de serveurs, pas d\'analyse. Toutes les données sur votre appareil.', f6_title:'Gestion des Clients', f6_desc:'Organisez vos clients avec tarifs horaires, devises et contacts.', price_label:'Tarifs', price_h2:'Des prix simples et honnêtes', price_sub:'Un tarif annuel bas. Sans frais cachés.', free_name:'Plan Gratuit', free_period:'Gratuit pour toujours', free_f1:'Jusqu\'à 3 clients', free_f2:'Jusqu\'à 2 factures', free_f3:'Minuterie de base', free_f4:'Factures PDF (avec filigrane)', free_f5:'Rapports mensuels', free_btn:'Télécharger gratuitement', pro_badge:'Le Plus Populaire', pro_name:'Plan Pro', pro_period:'par an · paiement annuel unique', pro_f1:'Clients illimités', pro_f2:'Factures illimitées', pro_f3:'PDF sans filigrane', pro_f4:'Rapports complets', pro_f5:'Export CSV', pro_f6:'Support prioritaire', pro_f7:'Sur n\'importe quel appareil', pro_btn:'Obtenir Pro — 9,99$/an →', price_note:'💳 Paiement sécurisé · Carte et PayPal · Clé d\'activation envoyée par email'},
+  de:  {flag:'🇩🇪', name:'Deutsch',            nav_features:'Funktionen', nav_pricing:'Preise', nav_legal:'Rechtliches', nav_cta:'Pro holen — 9,99$/Jahr', hero_badge:'Für Freelancer Weltweit', hero_h1:'Zeit erfassen.<br><em>Bezahlt werden.</em><br>Die Kontrolle behalten.', hero_p:'Alles-in-einem Zeiterfassung und Rechnungsgenerator. Offline. Ihre Daten bleiben auf Ihrem Gerät.', hero_btn1:'Pro holen — 9,99 $ / Jahr', hero_btn2:'Funktionen ansehen', stat_langs:'Sprachen', stat_currencies:'Währungen', stat_offline:'Offline', stat_data:'Daten gesammelt', feat_label:'Funktionen', feat_h2:'Alles für Ihr Freelance-Business', feat_sub:'Timer, Rechnungen und Berichte — alles in einer App, offline und privat.', f1_title:'Ein-Tap-Timer', f1_desc:'Sofort mit der Erfassung beginnen. Zeit Kunden und Projekten zuweisen.', f2_title:'PDF-Rechnungen', f2_desc:'Professionelle Rechnungen in Sekunden. Auto-Summen, Steuern, Rabatte.', f3_title:'Berichte', f3_desc:'Monatliche, jährliche und Gesamtberichte. CSV-Export.', f4_title:'16 Sprachen und 97 Währungen', f4_desc:'Verfügbar in 16 Sprachen. In 97 Währungen abrechnen.', f5_title:'100% Privat und Offline', f5_desc:'Keine Server, keine Analyse. Alle Daten nur auf Ihrem Gerät.', f6_title:'Kundenverwaltung', f6_desc:'Kunden mit Stundensätzen, Währungen und Kontakten organisieren.', price_label:'Preise', price_h2:'Einfache, faire Preise', price_sub:'Ein niedriger Jahresbeitrag. Keine versteckten Kosten.', free_name:'Kostenloser Plan', free_period:'Für immer kostenlos', free_f1:'Bis zu 3 Kunden', free_f2:'Bis zu 2 Rechnungen', free_f3:'Basis-Timer', free_f4:'PDF-Rechnungen (mit Wasserzeichen)', free_f5:'Monatliche Berichte', free_btn:'Kostenlos herunterladen', pro_badge:'Beliebteste', pro_name:'Pro-Plan', pro_period:'pro Jahr · einmaliger Jahresbetrag', pro_f1:'Unbegrenzte Kunden', pro_f2:'Unbegrenzte Rechnungen', pro_f3:'PDF ohne Wasserzeichen', pro_f4:'Vollständige Berichte', pro_f5:'CSV-Export', pro_f6:'Prioritätssupport', pro_f7:'Auf jedem Gerät mit Ihrem Schlüssel', pro_btn:'Pro holen — 9,99$/Jahr →', price_note:'💳 Sichere Zahlung · Karte und PayPal · Aktivierungscode per E-Mail'},
+  it:  {flag:'🇮🇹', name:'Italiano',           nav_features:'Funzioni', nav_pricing:'Prezzi', nav_legal:'Legale', nav_cta:'Ottieni Pro — $9.99/anno', hero_badge:'Per Freelancer in Tutto il Mondo', hero_h1:'Traccia il tempo.<br><em>Fatti pagare.</em><br>Resta in controllo.', hero_p:'Tracker del tempo e generatore di fatture tutto in uno. Funziona offline.', hero_btn1:'Ottieni Pro — $9.99 / anno', hero_btn2:'Vedi funzioni', stat_langs:'Lingue', stat_currencies:'Valute', stat_offline:'Offline', stat_data:'Dati raccolti', feat_label:'Funzioni', feat_h2:'Tutto ciò che serve per il tuo business freelance', feat_sub:'Timer, fatture e report — tutto in un\'app, offline e privato.', f1_title:'Timer in un tap', f1_desc:'Inizia a tracciare istantaneamente. Assegna tempo a clienti e progetti.', f2_title:'Fatture PDF', f2_desc:'Fatture professionali in secondi. Totali automatici, tasse, sconti.', f3_title:'Report', f3_desc:'Report mensili, annuali e totali. Esporta CSV.', f4_title:'16 Lingue e 97 Valute', f4_desc:'Disponibile in 16 lingue. Fattura in 97 valute.', f5_title:'100% Privato e Offline', f5_desc:'Nessun server, nessuna analisi. Tutti i dati sul tuo dispositivo.', f6_title:'Gestione Clienti', f6_desc:'Organizza i clienti con tariffe orarie, valute e contatti.', price_label:'Prezzi', price_h2:'Prezzi semplici e onesti', price_sub:'Una bassa tariffa annuale. Nessun costo nascosto.', free_name:'Piano Gratuito', free_period:'Sempre gratuito', free_f1:'Fino a 3 clienti', free_f2:'Fino a 2 fatture', free_f3:'Timer di base', free_f4:'Fatture PDF (con filigrana)', free_f5:'Report mensili', free_btn:'Scarica gratis', pro_badge:'Più Popolare', pro_name:'Piano Pro', pro_period:'all\'anno · pagamento annuale unico', pro_f1:'Clienti illimitati', pro_f2:'Fatture illimitate', pro_f3:'PDF senza filigrana', pro_f4:'Report completi', pro_f5:'Esporta CSV', pro_f6:'Supporto prioritario', pro_f7:'Su qualsiasi dispositivo con la tua chiave', pro_btn:'Ottieni Pro — $9.99/anno →', price_note:'💳 Pagamento sicuro · Carta e PayPal · Codice inviato via email'},
+  pt:  {flag:'🇧🇷', name:'Português',          nav_features:'Funcionalidades', nav_pricing:'Preços', nav_legal:'Legal', nav_cta:'Obter Pro — $9.99/ano', hero_badge:'Para Freelancers do Mundo Todo', hero_h1:'Rastreie o tempo.<br><em>Receba o pagamento.</em><br>Mantenha o controle.', hero_p:'Rastreador de tempo e gerador de faturas tudo em um. Funciona offline.', hero_btn1:'Obter Pro — $9.99 / ano', hero_btn2:'Ver funcionalidades', stat_langs:'Idiomas', stat_currencies:'Moedas', stat_offline:'Offline', stat_data:'Dados coletados', feat_label:'Funcionalidades', feat_h2:'Tudo que você precisa para seu negócio freelance', feat_sub:'Timer, faturas e relatórios — tudo em um app, offline e privado.', f1_title:'Timer com um toque', f1_desc:'Comece a rastrear instantaneamente. Atribua tempo a clientes e projetos.', f2_title:'Faturas PDF', f2_desc:'Gere faturas profissionais em segundos. Totais automáticos, impostos, descontos.', f3_title:'Relatórios', f3_desc:'Relatórios mensais, anuais e totais. Exportar CSV.', f4_title:'16 Idiomas e 97 Moedas', f4_desc:'Disponível em 16 idiomas. Fature em 97 moedas.', f5_title:'100% Privado e Offline', f5_desc:'Sem servidores, sem análises. Todos os dados no seu dispositivo.', f6_title:'Gestão de Clientes', f6_desc:'Organize clientes com taxas horárias, moedas e contatos.', price_label:'Preços', price_h2:'Preços simples e honestos', price_sub:'Uma taxa anual baixa. Sem custos ocultos.', free_name:'Plano Gratuito', free_period:'Sempre gratuito', free_f1:'Até 3 clientes', free_f2:'Até 2 faturas', free_f3:'Timer básico', free_f4:'Faturas PDF (com marca d\'água)', free_f5:'Relatórios mensais', free_btn:'Baixar grátis', pro_badge:'Mais Popular', pro_name:'Plano Pro', pro_period:'por ano · pagamento anual único', pro_f1:'Clientes ilimitados', pro_f2:'Faturas ilimitadas', pro_f3:'PDF sem marca d\'água', pro_f4:'Relatórios completos', pro_f5:'Exportar CSV', pro_f6:'Suporte prioritário', pro_f7:'Em qualquer dispositivo com sua chave', pro_btn:'Obter Pro — $9.99/ano →', price_note:'💳 Pagamento seguro · Cartão e PayPal · Chave de ativação enviada por email'},
+  hi:  {flag:'🇮🇳', name:'हिन्दी',             nav_features:'सुविधाएं', nav_pricing:'मूल्य', nav_legal:'कानूनी', nav_cta:'Pro पाएं — $9.99/वर्ष', hero_badge:'दुनिया भर के फ्रीलांसर्स के लिए', hero_h1:'समय ट्रैक करें।<br><em>भुगतान पाएं।</em><br>नियंत्रण में रहें।', hero_p:'ऑल-इन-वन टाइम ट्रैकर और इनवॉइस जेनरेटर। ऑफलाइन काम करता है।', hero_btn1:'Pro पाएं — $9.99 / वर्ष', hero_btn2:'सुविधाएं देखें', stat_langs:'भाषाएं', stat_currencies:'मुद्राएं', stat_offline:'ऑफलाइन', stat_data:'डेटा एकत्र', feat_label:'सुविधाएं', feat_h2:'आपके फ्रीलांस व्यवसाय के लिए सब कुछ', feat_sub:'टाइमर, इनवॉइस और रिपोर्ट — सब एक ऐप में, ऑफलाइन और निजी।', f1_title:'एक टैप टाइमर', f1_desc:'तुरंत ट्रैकिंग शुरू करें। किसी भी क्लाइंट और प्रोजेक्ट को समय दें।', f2_title:'PDF इनवॉइस', f2_desc:'सेकंड में पेशेवर इनवॉइस। स्वचालित कुल, कर, छूट।', f3_title:'रिपोर्ट', f3_desc:'मासिक, वार्षिक और कुल रिपोर्ट। CSV निर्यात।', f4_title:'16 भाषाएं और 97 मुद्राएं', f4_desc:'16 भाषाओं में उपलब्ध। 97 मुद्राओं में बिल करें।', f5_title:'100% निजी और ऑफलाइन', f5_desc:'कोई सर्वर नहीं, कोई एनालिटिक्स नहीं। सभी डेटा केवल आपके डिवाइस पर।', f6_title:'क्लाइंट प्रबंधन', f6_desc:'प्रति घंटे दर, मुद्रा और संपर्क के साथ क्लाइंट व्यवस्थित करें।', price_label:'मूल्य', price_h2:'सरल, ईमानदार मूल्य', price_sub:'एक कम वार्षिक शुल्क। कोई छिपी लागत नहीं।', free_name:'मुफ्त योजना', free_period:'हमेशा मुफ्त', free_f1:'अधिकतम 3 क्लाइंट', free_f2:'अधिकतम 2 इनवॉइस', free_f3:'बेसिक टाइमर', free_f4:'PDF इनवॉइस (वॉटरमार्क के साथ)', free_f5:'मासिक रिपोर्ट', free_btn:'मुफ्त डाउनलोड करें', pro_badge:'सबसे लोकप्रिय', pro_name:'Pro योजना', pro_period:'प्रति वर्ष · एकमुश्त वार्षिक भुगतान', pro_f1:'असीमित क्लाइंट', pro_f2:'असीमित इनवॉइस', pro_f3:'वॉटरमार्क के बिना PDF', pro_f4:'पूर्ण रिपोर्ट', pro_f5:'CSV निर्यात', pro_f6:'प्राथमिकता सहायता', pro_f7:'किसी भी डिवाइस पर अपनी key से', pro_btn:'Pro पाएं — $9.99/वर्ष →', price_note:'💳 सुरक्षित भुगतान · कार्ड और PayPal · सक्रियण कोड ईमेल पर'},
+  zh:  {flag:'🇨🇳', name:'中文',               nav_features:'功能', nav_pricing:'定价', nav_legal:'法律', nav_cta:'获取Pro — $9.99/年', hero_badge:'面向全球自由职业者', hero_h1:'追踪时间。<br><em>获得报酬。</em><br>保持掌控。', hero_p:'一站式时间追踪和发票生成器。离线工作。数据只存储在您的设备上。', hero_btn1:'获取Pro — $9.99 / 年', hero_btn2:'查看功能', stat_langs:'语言', stat_currencies:'货币', stat_offline:'离线', stat_data:'数据收集', feat_label:'功能', feat_h2:'自由职业所需的一切', feat_sub:'定时器、发票和报告 — 全在一个应用中，离线且私密。', f1_title:'一键计时器', f1_desc:'即时开始追踪。将时间分配给任何客户和项目。', f2_title:'PDF发票', f2_desc:'几秒内生成专业发票。自动合计、税务、折扣。', f3_title:'报告与洞察', f3_desc:'月度、年度和全部时间报告。导出CSV。', f4_title:'16种语言和97种货币', f4_desc:'支持16种语言。以97种货币开具发票。', f5_title:'100%私密且离线', f5_desc:'无服务器，无分析。所有数据仅在您的设备上。', f6_title:'客户管理', f6_desc:'按小时费率、货币和联系方式管理客户。', price_label:'定价', price_h2:'简单透明的定价', price_sub:'一次低廉的年费。无隐藏费用。', free_name:'免费计划', free_period:'永久免费', free_f1:'最多3个客户', free_f2:'最多2张发票', free_f3:'基础计时器', free_f4:'PDF发票（带水印）', free_f5:'月度报告', free_btn:'免费下载', pro_badge:'最受欢迎', pro_name:'Pro计划', pro_period:'每年 · 一次性年度付款', pro_f1:'无限客户', pro_f2:'无限发票', pro_f3:'无水印PDF', pro_f4:'完整报告', pro_f5:'导出CSV', pro_f6:'优先支持', pro_f7:'使用您的密钥在任何设备上', pro_btn:'获取Pro — $9.99/年 →', price_note:'💳 安全支付 · 银行卡和PayPal · 激活码立即发送至邮箱'},
+  ja:  {flag:'🇯🇵', name:'日本語',             nav_features:'機能', nav_pricing:'料金', nav_legal:'法的情報', nav_cta:'Proを取得 — $9.99/年', hero_badge:'世界中のフリーランサーへ', hero_h1:'時間を追跡。<br><em>報酬を受け取る。</em><br>コントロールを維持。', hero_p:'オールインワンの時間追跡と請求書生成。オフラインで動作。', hero_btn1:'Proを取得 — $9.99 / 年', hero_btn2:'機能を見る', stat_langs:'言語', stat_currencies:'通貨', stat_offline:'オフライン', stat_data:'収集データ', feat_label:'機能', feat_h2:'フリーランスビジネスに必要なすべて', feat_sub:'タイマー、請求書、レポート — すべてひとつのアプリで、オフライン、プライベート。', f1_title:'ワンタップタイマー', f1_desc:'すぐに追跡を開始。時間をクライアントとプロジェクトに割り当て。', f2_title:'PDF請求書', f2_desc:'数秒でプロの請求書を作成。自動合計、税金、割引。', f3_title:'レポート', f3_desc:'月次、年次、全期間レポート。CSVエクスポート。', f4_title:'16言語と97通貨', f4_desc:'16言語対応。97通貨で請求書発行。', f5_title:'100%プライベート＆オフライン', f5_desc:'サーバーなし、分析なし。すべてのデータはデバイス上のみ。', f6_title:'クライアント管理', f6_desc:'時給、通貨、連絡先でクライアントを整理。', price_label:'料金', price_h2:'シンプルで誠実な料金', price_sub:'低い年会費。隠れたコストなし。', free_name:'無料プラン', free_period:'永久無料', free_f1:'最大3クライアント', free_f2:'最大2つの請求書', free_f3:'基本タイマー', free_f4:'PDF請求書（透かし入り）', free_f5:'月次レポート', free_btn:'無料ダウンロード', pro_badge:'最人気', pro_name:'Proプラン', pro_period:'年 · 年次一括払い', pro_f1:'無制限クライアント', pro_f2:'無制限請求書', pro_f3:'透かしなしPDF', pro_f4:'完全なレポート', pro_f5:'CSVエクスポート', pro_f6:'優先サポート', pro_f7:'ライセンスキーで任意のデバイス', pro_btn:'Proを取得 — $9.99/年 →', price_note:'💳 安全な支払い · カードとPayPal · アクティベーションコードをメールで即送信'},
+  ko:  {flag:'🇰🇷', name:'한국어',             nav_features:'기능', nav_pricing:'요금제', nav_legal:'법적 정보', nav_cta:'Pro 구매 — $9.99/년', hero_badge:'전 세계 프리랜서를 위해', hero_h1:'시간을 추적하세요.<br><em>보수를 받으세요.</em><br>통제권을 유지하세요.', hero_p:'올인원 시간 추적기 및 인보이스 생성기. 오프라인 작동. 데이터는 기기에만 저장.', hero_btn1:'Pro 구매 — $9.99 / 년', hero_btn2:'기능 보기', stat_langs:'언어', stat_currencies:'통화', stat_offline:'오프라인', stat_data:'수집 데이터', feat_label:'기능', feat_h2:'프리랜서 비즈니스에 필요한 모든 것', feat_sub:'타이머, 인보이스, 리포트 — 모두 한 앱에서, 오프라인, 개인 정보 보호.', f1_title:'원탭 타이머', f1_desc:'즉시 추적 시작. 클라이언트와 프로젝트에 시간 할당.', f2_title:'PDF 인보이스', f2_desc:'수초 만에 전문적인 인보이스 생성. 자동 합계, 세금, 할인.', f3_title:'리포트', f3_desc:'월간, 연간, 전체 리포트. CSV 내보내기.', f4_title:'16개 언어 및 97개 통화', f4_desc:'16개 언어 지원. 97개 통화로 청구서 발행.', f5_title:'100% 개인 정보 보호 및 오프라인', f5_desc:'서버 없음, 분석 없음. 모든 데이터는 기기에만 저장.', f6_title:'클라이언트 관리', f6_desc:'시간당 요금, 통화, 연락처로 클라이언트 정리.', price_label:'요금제', price_h2:'단순하고 정직한 가격', price_sub:'낮은 연간 요금. 숨겨진 비용 없음.', free_name:'무료 플랜', free_period:'영원히 무료', free_f1:'최대 3명의 클라이언트', free_f2:'최대 2개의 인보이스', free_f3:'기본 타이머', free_f4:'PDF 인보이스 (워터마크 포함)', free_f5:'월간 리포트', free_btn:'무료 다운로드', pro_badge:'가장 인기 있는', pro_name:'Pro 플랜', pro_period:'연간 · 일회성 연간 결제', pro_f1:'무제한 클라이언트', pro_f2:'무제한 인보이스', pro_f3:'워터마크 없는 PDF', pro_f4:'완전한 리포트', pro_f5:'CSV 내보내기', pro_f6:'우선 지원', pro_f7:'라이선스 키로 모든 기기에서', pro_btn:'Pro 구매 — $9.99/년 →', price_note:'💳 안전한 결제 · 카드 및 PayPal · 활성화 코드 이메일로 즉시 전송'},
+  tr:  {flag:'🇹🇷', name:'Türkçe',            nav_features:'Özellikler', nav_pricing:'Fiyatlar', nav_legal:'Hukuki', nav_cta:"Pro Al — $9.99/yıl", hero_badge:'Dünya Genelindeki Freelancerlar İçin', hero_h1:'Zamanı takip edin.<br><em>Ödemenizi alın.</em><br>Kontrolü elinizde tutun.', hero_p:'Hepsi bir arada zaman takipçisi ve fatura oluşturucu. Çevrimdışı çalışır.', hero_btn1:"Pro Al — $9.99 / yıl", hero_btn2:'Özellikleri Gör', stat_langs:'Dil', stat_currencies:'Para Birimi', stat_offline:'Çevrimdışı', stat_data:'Toplanan Veri', feat_label:'Özellikler', feat_h2:'Freelance işiniz için ihtiyacınız olan her şey', feat_sub:'Zamanlayıcı, faturalar ve raporlar — hepsi bir uygulamada, çevrimdışı ve gizli.', f1_title:'Tek Dokunuşla Zamanlayıcı', f1_desc:'Anında takibe başlayın. Zamanı müşterilere ve projelere atayın.', f2_title:'PDF Faturalar', f2_desc:'Saniyeler içinde profesyonel fatura oluşturun. Otomatik toplamlar, vergi, indirim.', f3_title:'Raporlar', f3_desc:'Aylık, yıllık ve tüm zamanlı raporlar. CSV dışa aktarma.', f4_title:'16 Dil ve 97 Para Birimi', f4_desc:'16 dilde mevcut. 97 para biriminde fatura kesin.', f5_title:'%100 Özel ve Çevrimdışı', f5_desc:'Sunucu yok, analitik yok. Tüm veriler yalnızca cihazınızda.', f6_title:'Müşteri Yönetimi', f6_desc:'Saatlik ücret, para birimi ve iletişimle müşterileri düzenleyin.', price_label:'Fiyatlar', price_h2:'Basit, dürüst fiyatlar', price_sub:'Düşük yıllık ücret. Gizli maliyet yok.', free_name:'Ücretsiz Plan', free_period:'Sonsuza kadar ücretsiz', free_f1:'En fazla 3 müşteri', free_f2:'En fazla 2 fatura', free_f3:'Temel zamanlayıcı', free_f4:'PDF faturalar (filigranla)', free_f5:'Aylık raporlar', free_btn:'Ücretsiz İndir', pro_badge:'En Popüler', pro_name:'Pro Plan', pro_period:"yıl başına · tek seferlik yıllık ödeme", pro_f1:'Sınırsız müşteri', pro_f2:'Sınırsız fatura', pro_f3:'Filigransız PDF', pro_f4:'Tam raporlar', pro_f5:'CSV dışa aktarma', pro_f6:'Öncelikli destek', pro_f7:'Anahtarınızla herhangi bir cihazda', pro_btn:"Pro Al — $9.99/yıl →", price_note:'💳 Güvenli ödeme · Kart ve PayPal · Etkinleştirme kodu e-postaya gönderilir'},
+  id:  {flag:'🇮🇩', name:'Bahasa Indonesia',   nav_features:'Fitur', nav_pricing:'Harga', nav_legal:'Legal', nav_cta:'Dapatkan Pro — $9.99/thn', hero_badge:'Untuk Freelancer di Seluruh Dunia', hero_h1:'Lacak waktu Anda.<br><em>Dapatkan bayaran.</em><br>Tetap kendalikan.', hero_p:'Pelacak waktu dan generator faktur semuanya dalam satu. Bekerja offline.', hero_btn1:'Dapatkan Pro — $9.99 / tahun', hero_btn2:'Lihat Fitur', stat_langs:'Bahasa', stat_currencies:'Mata Uang', stat_offline:'Offline', stat_data:'Data Dikumpulkan', feat_label:'Fitur', feat_h2:'Semua yang Anda butuhkan untuk bisnis freelance', feat_sub:'Timer, faktur, dan laporan — semua dalam satu aplikasi, offline dan privat.', f1_title:'Timer Satu Ketuk', f1_desc:'Mulai melacak langsung. Tetapkan waktu ke klien dan proyek.', f2_title:'Faktur PDF', f2_desc:'Buat faktur profesional dalam hitungan detik. Total otomatis, pajak, diskon.', f3_title:'Laporan', f3_desc:'Laporan bulanan, tahunan, dan sepanjang masa. Ekspor CSV.', f4_title:'16 Bahasa dan 97 Mata Uang', f4_desc:'Tersedia dalam 16 bahasa. Tagih dalam 97 mata uang.', f5_title:'100% Privat dan Offline', f5_desc:'Tanpa server, tanpa analitik. Semua data hanya di perangkat Anda.', f6_title:'Manajemen Klien', f6_desc:'Atur klien dengan tarif per jam, mata uang, dan kontak.', price_label:'Harga', price_h2:'Harga sederhana dan jujur', price_sub:'Biaya tahunan rendah. Tanpa biaya tersembunyi.', free_name:'Paket Gratis', free_period:'Selamanya gratis', free_f1:'Hingga 3 klien', free_f2:'Hingga 2 faktur', free_f3:'Timer dasar', free_f4:'Faktur PDF (dengan watermark)', free_f5:'Laporan bulanan', free_btn:'Unduh Gratis', pro_badge:'Paling Populer', pro_name:'Paket Pro', pro_period:'per tahun · pembayaran tahunan sekali', pro_f1:'Klien tidak terbatas', pro_f2:'Faktur tidak terbatas', pro_f3:'PDF tanpa watermark', pro_f4:'Laporan lengkap', pro_f5:'Ekspor CSV', pro_f6:'Dukungan prioritas', pro_f7:'Di perangkat mana pun dengan kunci Anda', pro_btn:'Dapatkan Pro — $9.99/thn →', price_note:'💳 Pembayaran aman · Kartu dan PayPal · Kode aktivasi dikirim ke email'},
+  ur:  {flag:'🇵🇰', name:'اردو',              nav_features:'خصوصیات', nav_pricing:'قیمتیں', nav_legal:'قانونی', nav_cta:'Pro حاصل کریں — $9.99/سال', hero_badge:'دنیا بھر کے فری لانسرز کے لیے', hero_h1:'وقت ٹریک کریں۔<br><em>ادائیگی حاصل کریں۔</em><br>کنٹرول میں رہیں۔', hero_p:'آل-ان-ون ٹائم ٹریکر اور انوائس جنریٹر۔ آف لائن کام کرتا ہے۔', hero_btn1:'Pro حاصل کریں — $9.99 / سال', hero_btn2:'خصوصیات دیکھیں', stat_langs:'زبانیں', stat_currencies:'کرنسیاں', stat_offline:'آف لائن', stat_data:'جمع کردہ ڈیٹا', feat_label:'خصوصیات', feat_h2:'آپ کے فری لانس کاروبار کے لیے سب کچھ', feat_sub:'ٹائمر، انوائس اور رپورٹس — سب ایک ایپ میں، آف لائن اور نجی۔', f1_title:'ایک ٹیپ ٹائمر', f1_desc:'فوری ٹریکنگ شروع کریں۔ وقت کسی بھی کلائنٹ کو مختص کریں۔', f2_title:'PDF انوائس', f2_desc:'سیکنڈوں میں پیشہ ورانہ انوائس۔ خودکار مجموعہ، ٹیکس، رعایت۔', f3_title:'رپورٹس', f3_desc:'ماہانہ، سالانہ اور کل وقتی رپورٹس۔ CSV برآمد۔', f4_title:'16 زبانیں اور 97 کرنسیاں', f4_desc:'16 زبانوں میں دستیاب۔ 97 کرنسیوں میں بلنگ۔', f5_title:'100% نجی اور آف لائن', f5_desc:'کوئی سرور نہیں، کوئی تجزیہ نہیں۔ تمام ڈیٹا صرف آپ کے آلے پر۔', f6_title:'کلائنٹ مینجمنٹ', f6_desc:'فی گھنٹہ، کرنسی اور رابطہ کے ساتھ کلائنٹس منظم کریں۔', price_label:'قیمتیں', price_h2:'سادہ، ایماندارانہ قیمتیں', price_sub:'ایک کم سالانہ فیس۔ کوئی چھپی ہوئی لاگت نہیں۔', free_name:'مفت پلان', free_period:'ہمیشہ مفت', free_f1:'زیادہ سے زیادہ 3 کلائنٹس', free_f2:'زیادہ سے زیادہ 2 انوائس', free_f3:'بنیادی ٹائمر', free_f4:'PDF انوائس (واٹر مارک کے ساتھ)', free_f5:'ماہانہ رپورٹس', free_btn:'مفت ڈاؤن لوڈ', pro_badge:'سب سے مقبول', pro_name:'Pro پلان', pro_period:'سالانہ · ایک بار کی سالانہ ادائیگی', pro_f1:'لامحدود کلائنٹس', pro_f2:'لامحدود انوائس', pro_f3:'بغیر واٹر مارک PDF', pro_f4:'مکمل رپورٹس', pro_f5:'CSV برآمد', pro_f6:'ترجیحی سپورٹ', pro_f7:'اپنی key سے کسی بھی ڈیوائس پر', pro_btn:'Pro حاصل کریں — $9.99/سال →', price_note:'💳 محفوظ ادائیگی · کارڈ اور PayPal · فعال سازی کوڈ ای میل پر بھیجا جاتا ہے'},
+};
 
+let currentLang = 'en';
+
+// Build dropdown
+const dropdown = document.getElementById('langDropdown');
+Object.entries(langs).forEach(([code, t]) => {
+  const el = document.createElement('div');
+  el.className = 'lang-option' + (code === 'en' ? ' active' : '');
+  el.innerHTML = `${t.flag} ${t.name}`;
+  el.onclick = () => setLang(code);
+  dropdown.appendChild(el);
+});
+
+function setLang(code) {
+  currentLang = code;
+  const t = langs[code];
+
+  // Update current lang button
+  document.getElementById('currentLang').textContent = `${t.flag} ${code.toUpperCase()} ▾`;
+
+  // Update all translated elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+
+  // Update active state in dropdown
+  document.querySelectorAll('.lang-option').forEach((el, i) => {
+    el.classList.toggle('active', Object.keys(langs)[i] === code);
+  });
+
+  // RTL for Arabic, Urdu
+  document.body.style.direction = (code === 'ar' || code === 'ur') ? 'rtl' : 'ltr';
+}
+
+// Legal tabs
+function showLegal(tab) {
+  document.querySelectorAll('.legal-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.legal-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('legal-' + tab).classList.add('active');
+  document.getElementById('ltab-' + tab).classList.add('active');
+}
+
+// Hash navigation
+if(window.location.hash === '#terms') { showLegal('terms'); document.getElementById('legal').scrollIntoView(); }
+</script>
 </body>
 </html>
